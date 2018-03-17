@@ -207,34 +207,18 @@ public class Notepad extends javax.swing.JFrame {
     }//GEN-LAST:event_menuAbrirActionPerformed
 
     private void menuGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGuardarActionPerformed
-         if ("nuevo".equals(menuNuevo.getName())) {
-            jFileChooser1.setPreferredSize(new Dimension(900, 600));
-            int SeleccionUsuario = jFileChooser1.showSaveDialog(this.jScrollPane1);
-            if(SeleccionUsuario == JFileChooser.APPROVE_OPTION){     // si se ha seleccionado la opcion de abrir
-              try{
-                File fileToSave = jFileChooser1.getSelectedFile();
-                FileWriter escribir;
-                escribir = new FileWriter(fileToSave.getAbsolutePath(), true);
-                escribir.write(textArea.getText());
-                jTabbedPane1.setTitleAt(0, jFileChooser1.getName(fileToSave)); //establecer el nombre del archivo en pestaña de jtabbedpanel, 0 es la posicion de la pestaña en el array
-                escribir.close();
-              }
-              catch (IOException ex){
-                Logger.getLogger(Notepad.class.getName()).log(Level.SEVERE, null, ex);
-              }
-            }
-         }else{
-             try {
-                 File fileToSave = jFileChooser1.getSelectedFile(); // ruta del archivo a leer
-                 FileWriter escribir;
-                 escribir = new FileWriter(fileToSave.getAbsolutePath(), true); 
-                 escribir.write(textArea.getText()); // escribir en archivo
-                 jTabbedPane1.setTitleAt(0, jFileChooser1.getName(fileToSave)); //establecer el nombre del archivo en pestaña de jtabbedpanel, 0 es la posicion de la pestaña en el array
-                 escribir.close(); //cerrar archivo
-             } catch (IOException ex) {
-                 Logger.getLogger(Notepad.class.getName()).log(Level.SEVERE, null, ex);
-             }
-         }
+        try {
+            File fileToSave = jFileChooser1.getSelectedFile(); // ruta del archivo a leer
+            FileWriter escribir;
+            escribir = new FileWriter(fileToSave.getAbsolutePath(), false); 
+            escribir.write(textArea.getText()); // escribir en archivo
+            jTabbedPane1.setTitleAt(0, jFileChooser1.getName(fileToSave)); //establecer el nombre del archivo en pestaña de jtabbedpanel, 0 es la posicion de la pestaña en el array
+            escribir.close(); //cerrar archivo
+        } catch (java.lang.NullPointerException ex){ // si no no se ha abierto ningun archivo llama al metodo de guardarComo
+            menuGuardarComoActionPerformed(evt);
+        } catch (IOException ex) {
+            Logger.getLogger(Notepad.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_menuGuardarActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
@@ -242,7 +226,8 @@ public class Notepad extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void menuNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNuevoActionPerformed
-        // TODO add your handling code here:
+        textArea.setText(""); // vaciar el textarea
+        jTabbedPane1.setTitleAt(0, "nuevo"); //establecer el nombre del archivo en pestaña de jtabbedpanel, 0 es la posicion de la pestaña en el array
     }//GEN-LAST:event_menuNuevoActionPerformed
     
     //crear un popupmenu en la posicion del raton al hacer click derecho
@@ -279,7 +264,7 @@ public class Notepad extends javax.swing.JFrame {
           try{
             File fileToSave = jFileChooser1.getSelectedFile();
             FileWriter escribir;
-            escribir = new FileWriter(fileToSave.getAbsolutePath(), true);
+            escribir = new FileWriter(fileToSave.getAbsolutePath(), false);
             escribir.write(textArea.getText());
             jTabbedPane1.setTitleAt(0, jFileChooser1.getName(fileToSave)); //establecer el nombre del archivo en pestaña de jtabbedpanel, 0 es la posicion de la pestaña en el array
             escribir.close();
@@ -291,7 +276,7 @@ public class Notepad extends javax.swing.JFrame {
     }//GEN-LAST:event_menuGuardarComoActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_menuSalirActionPerformed
     
     
