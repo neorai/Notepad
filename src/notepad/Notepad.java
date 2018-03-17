@@ -210,7 +210,7 @@ public class Notepad extends javax.swing.JFrame {
         try {
             File fileToSave = jFileChooser1.getSelectedFile(); // ruta del archivo a leer
             FileWriter escribir;
-            escribir = new FileWriter(fileToSave.getAbsolutePath(), false); 
+            escribir = new FileWriter(fileToSave.getAbsolutePath(), false); //abre el archivo desde su ruta compelta para trabajar con el 
             escribir.write(textArea.getText()); // escribir en archivo
             jTabbedPane1.setTitleAt(0, jFileChooser1.getName(fileToSave)); //establecer el nombre del archivo en pestaña de jtabbedpanel, 0 es la posicion de la pestaña en el array
             escribir.close(); //cerrar archivo
@@ -235,7 +235,7 @@ public class Notepad extends javax.swing.JFrame {
         if(SwingUtilities.isRightMouseButton(evt)){
             jPopupMenu1.add(menuItemPopUpCopiar);
             jPopupMenu1.add(menuItemPopUpPegar);
-            jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY());
+            jPopupMenu1.show(evt.getComponent(), evt.getX(), evt.getY()); //mostrar el componenete en la posicion del raton
         }
     }//GEN-LAST:event_textAreaMouseClicked
 
@@ -262,9 +262,9 @@ public class Notepad extends javax.swing.JFrame {
         int SeleccionUsuario = jFileChooser1.showSaveDialog(this.jScrollPane1);
         if(SeleccionUsuario == JFileChooser.APPROVE_OPTION){     // si se ha seleccionado la opcion de abrir
           try{
-            File fileToSave = jFileChooser1.getSelectedFile();
+            File fileToSave = jFileChooser1.getSelectedFile(); //archivo seleccionado con JFileChoser
             FileWriter escribir;
-            escribir = new FileWriter(fileToSave.getAbsolutePath(), false);
+            escribir = new FileWriter(fileToSave.getAbsolutePath(), false); // abrir archivo con el, false para sobreescribir el archivo
             escribir.write(textArea.getText());
             jTabbedPane1.setTitleAt(0, jFileChooser1.getName(fileToSave)); //establecer el nombre del archivo en pestaña de jtabbedpanel, 0 es la posicion de la pestaña en el array
             escribir.close();
@@ -276,7 +276,7 @@ public class Notepad extends javax.swing.JFrame {
     }//GEN-LAST:event_menuGuardarComoActionPerformed
 
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
-        System.exit(0);
+        System.exit(0); //salir de la apliacion
     }//GEN-LAST:event_menuSalirActionPerformed
     
     
