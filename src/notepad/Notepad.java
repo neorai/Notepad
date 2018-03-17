@@ -208,7 +208,21 @@ public class Notepad extends javax.swing.JFrame {
 
     private void menuGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGuardarActionPerformed
          if ("nuevo".equals(menuNuevo.getName())) {
-             menuGuardarComoActionPerformed(evt);
+            jFileChooser1.setPreferredSize(new Dimension(900, 600));
+            int SeleccionUsuario = jFileChooser1.showSaveDialog(this.jScrollPane1);
+            if(SeleccionUsuario == JFileChooser.APPROVE_OPTION){     // si se ha seleccionado la opcion de abrir
+              try{
+                File fileToSave = jFileChooser1.getSelectedFile();
+                FileWriter escribir;
+                escribir = new FileWriter(fileToSave.getAbsolutePath(), true);
+                escribir.write(textArea.getText());
+                jTabbedPane1.setTitleAt(0, jFileChooser1.getName(fileToSave)); //establecer el nombre del archivo en pestaña de jtabbedpanel, 0 es la posicion de la pestaña en el array
+                escribir.close();
+              }
+              catch (IOException ex){
+                Logger.getLogger(Notepad.class.getName()).log(Level.SEVERE, null, ex);
+              }
+            }
          }else{
              try {
                  File fileToSave = jFileChooser1.getSelectedFile(); // ruta del archivo a leer
