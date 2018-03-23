@@ -60,13 +60,17 @@ public class Notepad extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        menuArchivo = new javax.swing.JMenu();
         menuNuevo = new javax.swing.JMenuItem();
         menuAbrir = new javax.swing.JMenuItem();
         menuGuardar = new javax.swing.JMenuItem();
         menuGuardarComo = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         menuSalir = new javax.swing.JMenuItem();
+        menuEditar = new javax.swing.JMenu();
+        MenuItemCortar = new javax.swing.JMenuItem();
+        MenuItemCopiar = new javax.swing.JMenuItem();
+        MenuItemPegar = new javax.swing.JMenuItem();
 
         menuItemPopUpCopiar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         menuItemPopUpCopiar.setText("Copiar");
@@ -99,11 +103,11 @@ public class Notepad extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("nuevo", jScrollPane1);
 
-        jMenu1.setText("Archivo");
-        jMenu1.setToolTipText("");
-        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+        menuArchivo.setText("Archivo");
+        menuArchivo.setToolTipText("");
+        menuArchivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu1ActionPerformed(evt);
+                menuArchivoActionPerformed(evt);
             }
         });
 
@@ -114,7 +118,7 @@ public class Notepad extends javax.swing.JFrame {
                 menuNuevoActionPerformed(evt);
             }
         });
-        jMenu1.add(menuNuevo);
+        menuArchivo.add(menuNuevo);
 
         menuAbrir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         menuAbrir.setText("Abrir...");
@@ -123,7 +127,7 @@ public class Notepad extends javax.swing.JFrame {
                 menuAbrirActionPerformed(evt);
             }
         });
-        jMenu1.add(menuAbrir);
+        menuArchivo.add(menuAbrir);
 
         menuGuardar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         menuGuardar.setText("Guardar");
@@ -132,7 +136,7 @@ public class Notepad extends javax.swing.JFrame {
                 menuGuardarActionPerformed(evt);
             }
         });
-        jMenu1.add(menuGuardar);
+        menuArchivo.add(menuGuardar);
 
         menuGuardarComo.setText("Guardar como...");
         menuGuardarComo.addActionListener(new java.awt.event.ActionListener() {
@@ -140,8 +144,8 @@ public class Notepad extends javax.swing.JFrame {
                 menuGuardarComoActionPerformed(evt);
             }
         });
-        jMenu1.add(menuGuardarComo);
-        jMenu1.add(jSeparator1);
+        menuArchivo.add(menuGuardarComo);
+        menuArchivo.add(jSeparator1);
 
         menuSalir.setText("Salir");
         menuSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -149,9 +153,39 @@ public class Notepad extends javax.swing.JFrame {
                 menuSalirActionPerformed(evt);
             }
         });
-        jMenu1.add(menuSalir);
+        menuArchivo.add(menuSalir);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(menuArchivo);
+
+        menuEditar.setText("Editar");
+
+        MenuItemCortar.setText("Cortar");
+        MenuItemCortar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemCortarActionPerformed(evt);
+            }
+        });
+        menuEditar.add(MenuItemCortar);
+
+        MenuItemCopiar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        MenuItemCopiar.setText("Copiar");
+        MenuItemCopiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemCopiarActionPerformed(evt);
+            }
+        });
+        menuEditar.add(MenuItemCopiar);
+
+        MenuItemPegar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        MenuItemPegar.setText("Pegar");
+        MenuItemPegar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItemPegarActionPerformed(evt);
+            }
+        });
+        menuEditar.add(MenuItemPegar);
+
+        jMenuBar1.add(menuEditar);
 
         setJMenuBar(jMenuBar1);
 
@@ -221,9 +255,9 @@ public class Notepad extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menuGuardarActionPerformed
 
-    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+    private void menuArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuArchivoActionPerformed
 
-    }//GEN-LAST:event_jMenu1ActionPerformed
+    }//GEN-LAST:event_menuArchivoActionPerformed
 
     private void menuNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNuevoActionPerformed
         textArea.setText(""); // vaciar el textarea
@@ -278,6 +312,21 @@ public class Notepad extends javax.swing.JFrame {
     private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
         System.exit(0); //salir de la apliacion
     }//GEN-LAST:event_menuSalirActionPerformed
+
+    private void MenuItemCortarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCortarActionPerformed
+        Clipboard clipboard = Toolkit.getDefaultToolkit ().getSystemClipboard (); // inicia toolkit
+        StringSelection stringSelection = new StringSelection(textArea.getSelectedText()); // para poder tranferir el texto a a clipboard
+        textArea.replaceSelection("");
+        clipboard.setContents(stringSelection, null); //inserta el texto seleccionado en clipboard
+    }//GEN-LAST:event_MenuItemCortarActionPerformed
+
+    private void MenuItemCopiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemCopiarActionPerformed
+        menuItemPopUpCopiarActionPerformed(evt);
+    }//GEN-LAST:event_MenuItemCopiarActionPerformed
+
+    private void MenuItemPegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemPegarActionPerformed
+       menuItemPopUpPegarActionPerformed(evt);
+    }//GEN-LAST:event_MenuItemPegarActionPerformed
     
     
     
@@ -317,14 +366,18 @@ public class Notepad extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem MenuItemCopiar;
+    private javax.swing.JMenuItem MenuItemCortar;
+    private javax.swing.JMenuItem MenuItemPegar;
     private javax.swing.JFileChooser jFileChooser1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JMenuItem menuAbrir;
+    private javax.swing.JMenu menuArchivo;
+    private javax.swing.JMenu menuEditar;
     private javax.swing.JMenuItem menuGuardar;
     private javax.swing.JMenuItem menuGuardarComo;
     private javax.swing.JMenuItem menuItemPopUpCopiar;
